@@ -38,3 +38,21 @@ Open `structured_extractor.py`:
 - **`CalendarEvent`**: The Pydantic model defining what we want.
 - **`Field(description=...)`**: These descriptions are sent to the LLM! They act as "mini-prompts" telling the LLM how to fill that specific field.
 - **`client.beta.chat.completions.parse`**: The magic method that enforces the structure.
+
+## Part 2: Function Calling (Tool Use)
+
+While `structured_extractor.py` shows how to get data *out*, **Function Calling** is how agents *act*.
+
+### The Concept
+1.  **Define**: You describe a Python function to the LLM (name, description, arguments).
+2.  **Invoke**: You send the user query + the tool definition.
+3.  **Decide**: The LLM decides "I need to call this function" and gives you the arguments.
+4.  **Execute**: **You** run the Python code (the LLM cannot run code itself).
+5.  **Return**: You give the result back to the LLM.
+
+### Run the script
+```bash
+python day2/tool_calling.py
+```
+
+This script demonstrates a full "Tool Use" loop where the model asks for weather data, we fetch it (mocked), and the model summarizes it.
